@@ -1,71 +1,43 @@
-# Mini_script
+# AWS Cloud Manager Script
 
-Perfect — I can help you turn this into a neat **markdown report** that documents what you learned, including the screenshots and explanation. Here’s a structured version:
+## Overview
+This project demonstrates how to use **environment variables** and **shell scripting** to manage different infrastructure environments (dev, test, prod) on AWS.  
+The script provisions EC2 instances with different configurations depending on the environment.
 
-````markdown
-# Shell Scripting: Passing Arguments and Environment Variables
+## Features
+- Environment-based logic using shell `case` statements  
+- AWS CLI integration to launch EC2 instances  
+- Clear separation of `dev`, `test`, and `prod` settings  
+- Extensible for real-world deployments  
 
-## What I Learned
+## Usage
+1. Configure AWS CLI with valid credentials:
+   ```bash
+   aws configure
+Make the script executable:
+chmod +x aws_cloud_manager.sh
 
-In this exercise, I learned how to pass an **argument** to a shell script so that the outcome of the script can be changed dynamically based on the value provided.  
+Run for a specific environment:
+./aws_cloud_manager.sh dev
+./aws_cloud_manager.sh test
+./aws_cloud_manager.sh prod
 
-I used the command:  
+Example Output
+Launching dev environment EC2 instance...
+{
+    "Instances": [
+        {
+            "InstanceId": "i-0abcd1234efgh5678",
+            "State": { "Name": "pending" },
+            "InstanceType": "t2.micro",
+            "Tags": [{ "Key": "Environment", "Value": "dev" }]
+        }
+    ]
+}
 
-```bash
-export ENVIRONMENT=production
-````
+Project Structure
 
-to pass the environment as a parameter to the script (`aws_cloud_manager.sh`).
-
-I also learned that arguments provided to a script can be **validated** by adding logic such as:
-
-```bash
-# Checking the number of arguments
-if [ "$#" -ne 1 ]; then 
-    echo "Usage: $0 <environment>"
-    exit 1
-fi
-```
-
-This ensures the script only runs if the correct number of arguments is provided.
-
----
-
-## Screenshots
-
-### Running the script without arguments
-
-![No environment specified](f2cb8f00-63a5-4917-be57-b6e664c60832.png)
-
----
-
-### Running the script with arguments
-
-Example: passing `testing` as the environment.
-
-```bash
-./aws_cloud_manager.sh testing
-```
-
-Output:
-
-```
-Running script for Testing Environment...
-```
-
-![Script running with testing argument](917fded7-1c03-4e0b-a8b4-da866aadfbb4.png)
-
----
-
-## Key Takeaways
-
-* I can pass arguments to scripts to modify their behavior dynamically.
-* I can set environment variables using `export`.
-* Input validation (`$#`) ensures proper usage and prevents errors.
-* Adding such logic improves the reliability and consistency of scripts.
-
-```
-
-Do you want me to save this as a **`.md` file** for download, just like I did with your AWS setup guide?
-```
+.
+├── aws_cloud_manager.sh   # Main script
+└── README.md              # Documentation
 
